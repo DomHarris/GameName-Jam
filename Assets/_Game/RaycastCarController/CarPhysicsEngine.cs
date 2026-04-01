@@ -40,7 +40,7 @@ namespace Car
             }
         }
 
-        public void ProcessPhysics(float throttleInput, float steerInput, bool isBraking)
+        public void ProcessPhysics(float throttleInput, float steerInput, bool isBraking, bool handbrake)
         {
             var carUp = _carTransform.up;
             var dt = Time.fixedDeltaTime;
@@ -65,30 +65,49 @@ namespace Car
                 if (Physics.Raycast(tirePos, -carUp, out var hit, _config.suspensionRestDist))
                 {
                     var offset = _config.suspensionRestDist - hit.distance;
+                    var contactPoint = hit.point;
                     
                     var tireWorldVel = _rb.GetPointVelocity(tirePos);
                     var vel = Vector3.Dot(carUp, tireWorldVel);
                     var force = (offset * _config.springStrength) - (vel * _config.springDamper);
                     _rb.AddForceAtPosition(carUp * force, tirePos);
 
-                    var steeringDir = tireTrans.right;
-                    var steeringVel = Vector3.Dot(steeringDir, tireWorldVel);
-                    var tireVelSpeed = tireWorldVel.magnitude;
+                    var steeringDir = Vector3.ProjectOnPlane(tireTrans.right, hit.normal).normalized;
+                    if (steeringDir.sqrMagnitude < 0.0001f)
+                        continue;
+
+                    var contactVelocity = _rb.GetPointVelocity(contactPoint);
+                    var steeringVel = Vector3.Dot(steeringDir, contactVelocity);
+                    var tireVelSpeed = contactVelocity.magnitude;
                     var slipRatio = tireVelSpeed > 0 ? Mathf.Abs(steeringVel) / tireVelSpeed : 0f;
 
                     var gripFactor = gripCurve.Evaluate(slipRatio);
+                    if (handbrake && !tire.IsFrontWheel)
+                        gripFactor *= _config.handbrakeRearGripMultiplier;
                     
                     var desiredVelChange = -steeringVel * gripFactor;
                     var desiredAccel = desiredVelChange / dt;
-                    _rb.AddForceAtPosition(steeringDir * (_config.tireMass * desiredAccel), tirePos);
+                    _rb.AddForceAtPosition(steeringDir * (_config.tireMass * desiredAccel), contactPoint);
 
                     
                     if (throttleInput > 0)
                     {
-                        var accelDir = tireTrans.forward;
-                        
-                        var torque = _config.powerCurve.Evaluate(_data.NormalisedSpeed) * throttleInput * _config.accelForce;
-                        _rb.AddForceAtPosition(accelDir * torque, tirePos);
+                        // Keep drive force tangent to the contact surface so body pitch does not shove the nose into the ground.
+                        var accelDir = Vector3.ProjectOnPlane(tireTrans.forward, hit.normal).normalized;
+                        if (accelDir.sqrMagnitude > 0.0001f)
+                        {
+                            var torque = _config.powerCurve.Evaluate(_data.NormalisedSpeed) * throttleInput * _config.accelForce;
+                            _rb.AddForceAtPosition(accelDir * torque, contactPoint);
+                        }
+                    }
+                    else if (throttleInput < 0)
+                    {
+                        var accelDir = Vector3.ProjectOnPlane(-tireTrans.forward, hit.normal).normalized;
+                        if (accelDir.sqrMagnitude > 0.0001f)
+                        {
+                            var torque = _config.powerCurve.Evaluate(_data.NormalisedSpeed) * -throttleInput * _config.reverseForce;
+                            _rb.AddForceAtPosition(accelDir * torque, contactPoint);
+                        }
                     }
                 }
             }

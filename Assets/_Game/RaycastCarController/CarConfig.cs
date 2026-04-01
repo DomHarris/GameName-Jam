@@ -19,12 +19,16 @@ namespace Car
         
         [Header("Movement")] public float carTopSpeed = 20f;
         public float accelForce = 500f;
+        public float reverseForce = 300f;
         public float steerAngle = 30f;
         public AnimationCurve powerCurve;
 
         [Header("Grip & Friction")] public AnimationCurve gripCurveFront;
         public AnimationCurve gripCurveBack;
         public float tireMass = 10f;
+        
+        [Tooltip("Rear-wheel lateral grip multiplier while handbrake is held (0 = no grip, 1 = unchanged).")]
+        [Range(0f, 1f)] public float handbrakeRearGripMultiplier = 0.35f;
         
         public void ValidateCurves()
         {

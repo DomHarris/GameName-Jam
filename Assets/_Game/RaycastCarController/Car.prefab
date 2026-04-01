@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7051000396503115785}
   - component: {fileID: 2803642819134136028}
   - component: {fileID: 1659034957654083016}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6241223129738434460}
+  - {fileID: 5227016725672349822}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8358021074766559522
@@ -44,10 +45,10 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3501064414702531795}
   serializedVersion: 5
-  m_Mass: 2000
+  m_Mass: 3000
   m_LinearDamping: 1
-  m_AngularDamping: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_AngularDamping: 3
+  m_CenterOfMass: {x: 0, y: -1, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
@@ -60,7 +61,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 3
 --- !u!114 &7051000396503115785
@@ -75,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 870e13550d3234dfda1d458ee715eed0, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -89,7 +90,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -123,6 +124,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ffba09334294fc9891ed3b1047bf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Car.CarInputAdapter
+--- !u!1 &7603736620558219421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5227016725672349822}
+  - component: {fileID: 7371212798711727672}
+  m_Layer: 6
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5227016725672349822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603736620558219421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5166921505972755550}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7371212798711727672
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603736620558219421}
+  m_Material: {fileID: 13400000, guid: 059c318d329ec439fa5899fe7c0375bf, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.66, y: 0.85, z: 3.13}
+  m_Center: {x: 0, y: 0.62, z: 0}
 --- !u!1001 &6110581899884020585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -171,14 +225,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 174767904811656132, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 784486640907189466, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132569373630877533, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601155378802324797, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905641803312827135, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2997067873360490435, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3694384565954954303, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5285115066177866380, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
       propertyPath: m_Name
       value: Ascella
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285115066177866380, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5313751841590211501, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: fc8eb0b0be249bb408c46d89e3f900c7, type: 2}
+    - target: {fileID: 7893215094680014048, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8666224666873990863, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8938753038427729533, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9021296743030741512, guid: c77a45a141a61c84aa2ded8232ed4cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

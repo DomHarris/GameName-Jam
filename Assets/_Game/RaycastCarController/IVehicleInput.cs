@@ -7,6 +7,8 @@ namespace Car
         float ThrottleInput { get; }
         
         bool BrakeInput { get; }
+        
+        bool HandbrakeInput { get; }
     }
 }
 

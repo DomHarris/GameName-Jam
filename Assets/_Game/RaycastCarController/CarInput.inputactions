@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Handbrake",
+                    "type": "Value",
+                    "id": "c1d2e3f4-a5b6-4c7d-8e9f-0123456789ab",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -104,11 +113,33 @@
                 {
                     "name": "",
                     "id": "b3c1c7f0-bd20-4ee7-a0f1-899b24bca6d7",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e2f3a4b5-c6d7-48e9-f012-3456789abcde",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Handbrake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3a4b5c6-d7e8-49f0-a123-456789abcdef",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Handbrake",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -157,15 +188,37 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
+                    "name": "Keyboard WS",
                     "id": "3c2b8752-aebe-40b2-ad14-196a06c81f76",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerate",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "8e4f1a2b-3c4d-5e6f-7081-92a3b4c5d6e7",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9f5a2b3c-4d5e-6f70-8192-a3b4c5d6e7f8",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Accelerate",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -185,6 +238,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "Scale(factor=-1)",
+                    "groups": ";Gamepad",
                     "action": "Accelerate",
                     "isComposite": false,
                     "isPartOfComposite": false
